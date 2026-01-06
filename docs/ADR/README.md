@@ -31,6 +31,7 @@ Example: `001-typescript-migration.md`
 | [002](./002-nodejs-version-update.md) | Node.js Version Update to v24 | Accepted | 2026-01-06 |
 | [003](./003-eslint-and-code-quality.md) | ESLint and Code Quality Tooling | Accepted | 2026-01-06 |
 | [004](./004-testing-infrastructure.md) | Testing Infrastructure with Node.js Test Runner | Accepted | 2026-01-06 |
+| [005](./005-project-upgrade-summary.md) | Project Upgrade Summary - TypeScript Migration and Modernization | Accepted | 2026-01-06 |
 
 ## Creating a New ADR
 

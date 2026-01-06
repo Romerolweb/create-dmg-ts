@@ -12,20 +12,25 @@
 	},
 	"type": "module",
 	"bin": {
-		"create-dmg": "./cli.js"
+		"create-dmg": "./dist/cli.js"
 	},
 	"engines": {
-		"node": ">=18"
+		"node": ">=24"
 	},
 	"scripts": {
-		"test": "ava"
+		"build": "tsc",
+		"typecheck": "tsc --noEmit",
+		"lint": "eslint .",
+		"lint:fix": "eslint . --fix",
+		"test": "node --experimental-strip-types --test dist/**/*.test.js",
+		"pretest": "npm run build",
+		"prepare": "husky || true"
 	},
 	"files": [
-		"cli.js",
-		"compose-icon.js",
+		"dist/**/*.js",
+		"dist/**/*.d.ts",
 		"assets",
 		"disk-icon.icns",
-		"sla.js",
 		"base.r"
 	],
 	"keywords": [
@@ -52,7 +57,18 @@
 		"tempy": "^3.1.0"
 	},
 	"devDependencies": {
-		"ava": "^6.1.1",
-		"xo": "^0.56.0"
+		"@types/node": "^24.0.0",
+		"@typescript-eslint/eslint-plugin": "^8.19.1",
+		"@typescript-eslint/parser": "^8.19.1",
+		"eslint": "^9.17.0",
+		"husky": "^9.1.7",
+		"lint-staged": "^15.2.11",
+		"typescript": "^5.7.2"
+	},
+	"lint-staged": {
+		"*.ts": [
+			"eslint --fix",
+			"tsc --noEmit"
+		]
 	}
 }

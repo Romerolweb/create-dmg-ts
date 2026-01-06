@@ -29,6 +29,8 @@ Example: `001-typescript-migration.md`
 | [000](./000-adr-template.md) | ADR Template | Template | - |
 | [001](./001-typescript-migration.md) | Migration to TypeScript | Accepted | 2026-01-06 |
 | [002](./002-nodejs-version-update.md) | Node.js Version Update to v24 | Accepted | 2026-01-06 |
+| [003](./003-eslint-and-code-quality.md) | ESLint and Code Quality Tooling | Accepted | 2026-01-06 |
+| [004](./004-testing-infrastructure.md) | Testing Infrastructure with Node.js Test Runner | Accepted | 2026-01-06 |
 
 ## Creating a New ADR
 

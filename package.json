@@ -19,10 +19,11 @@
 	},
 	"scripts": {
 		"build": "tsc",
+		"postbuild": "node scripts/postbuild.mjs",
 		"typecheck": "tsc --noEmit",
 		"lint": "eslint .",
 		"lint:fix": "eslint . --fix",
-		"test": "node --experimental-strip-types --test dist/**/*.test.js",
+		"test": "node --test dist/**/*.test.js",
 		"pretest": "npm run build",
 		"prepare": "husky || true"
 	},

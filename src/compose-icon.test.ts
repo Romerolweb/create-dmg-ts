@@ -1,8 +1,8 @@
 import {describe, test} from 'node:test';
 import assert from 'node:assert';
 
-describe('Icon Composition', () => {
-	test('module exports a function', async () => {
+void describe('Icon Composition', () => {
+	void test('module exports a function', async () => {
 		// Dynamic import to avoid issues with module loading
 		const composeIconModule = await import('./compose-icon.js');
 		const composeIcon = composeIconModule.default;
@@ -10,7 +10,7 @@ describe('Icon Composition', () => {
 		assert.strictEqual(typeof composeIcon, 'function');
 	});
 
-	test('returns a string path', async () => {
+	void test('returns a string path', async () => {
 		const composeIconModule = await import('./compose-icon.js');
 		const composeIcon = composeIconModule.default;
 		

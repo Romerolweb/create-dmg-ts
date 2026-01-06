@@ -8,8 +8,8 @@ import {temporaryDirectory} from 'tempy';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-describe('create-dmg CLI', () => {
-	test('creates DMG for fixture app', async () => {
+void describe('create-dmg CLI', () => {
+	void test('creates DMG for fixture app', async () => {
 		const cwd = temporaryDirectory();
 		const cliPath = path.join(__dirname, 'cli.js');
 		const fixturePath = path.join(__dirname, '..', 'fixtures', 'Fixture.app');
@@ -27,7 +27,7 @@ describe('create-dmg CLI', () => {
 		assert.ok(fs.existsSync(dmgPath), 'DMG file should be created');
 	});
 
-	test('creates DMG with binary plist', async () => {
+	void test('creates DMG with binary plist', async () => {
 		const cwd = temporaryDirectory();
 		const cliPath = path.join(__dirname, 'cli.js');
 		const fixturePath = path.join(__dirname, '..', 'fixtures', 'Fixture-with-binary-plist.app');
@@ -45,7 +45,7 @@ describe('create-dmg CLI', () => {
 		assert.ok(fs.existsSync(dmgPath), 'DMG file should be created');
 	});
 
-	test('creates DMG for app without icon', async () => {
+	void test('creates DMG for app without icon', async () => {
 		const cwd = temporaryDirectory();
 		const cliPath = path.join(__dirname, 'cli.js');
 		const fixturePath = path.join(__dirname, '..', 'fixtures', 'Fixture-no-icon.app');
@@ -63,7 +63,7 @@ describe('create-dmg CLI', () => {
 		assert.ok(fs.existsSync(dmgPath), 'DMG file should be created');
 	});
 
-	test('respects --no-version-in-filename flag', async () => {
+	void test('respects --no-version-in-filename flag', async () => {
 		const cwd = temporaryDirectory();
 		const cliPath = path.join(__dirname, 'cli.js');
 		const fixturePath = path.join(__dirname, '..', 'fixtures', 'Fixture.app');
@@ -84,7 +84,7 @@ describe('create-dmg CLI', () => {
 		assert.ok(!fs.existsSync(dmgWithVersionPath), 'DMG file with version should not exist');
 	});
 
-	test('respects --no-code-sign flag', async () => {
+	void test('respects --no-code-sign flag', async () => {
 		const cwd = temporaryDirectory();
 		const cliPath = path.join(__dirname, 'cli.js');
 		const fixturePath = path.join(__dirname, '..', 'fixtures', 'Fixture.app');

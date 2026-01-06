@@ -1,11 +1,11 @@
-import {describe, test, mock} from 'node:test';
+import {describe, test} from 'node:test';
 import assert from 'node:assert';
 import path from 'node:path';
 import fs from 'node:fs';
 import {temporaryDirectory} from 'tempy';
 
-describe('Software License Agreement (SLA)', () => {
-	test('module exports a function', async () => {
+void describe('Software License Agreement (SLA)', () => {
+	void test('module exports a function', async () => {
 		// Dynamic import to avoid issues with module loading
 		const slaModule = await import('./sla.js');
 		const addLicenseAgreementIfNeeded = slaModule.default;
@@ -13,7 +13,7 @@ describe('Software License Agreement (SLA)', () => {
 		assert.strictEqual(typeof addLicenseAgreementIfNeeded, 'function');
 	});
 
-	test('skips processing when no license files exist', async () => {
+	void test('skips processing when no license files exist', async () => {
 		const slaModule = await import('./sla.js');
 		const addLicenseAgreementIfNeeded = slaModule.default;
 		
@@ -34,7 +34,7 @@ describe('Software License Agreement (SLA)', () => {
 		}
 	});
 
-	test('detects license.txt file', async () => {
+	void test('detects license.txt file', async () => {
 		const tempDir = temporaryDirectory();
 		const originalCwd = process.cwd();
 		

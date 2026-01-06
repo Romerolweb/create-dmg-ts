@@ -183,61 +183,63 @@ async function init(): Promise<void> {
 		}
 	});
 
-	ee.on('finish', async () => {
-		try {
-			ora.text = 'Adding Software License Agreement if needed';
-			await addLicenseAgreementIfNeeded(dmgPath, dmgFormat);
+	ee.on('finish', () => {
+		void (async () => {
+			try {
+				ora.text = 'Adding Software License Agreement if needed';
+				await addLicenseAgreementIfNeeded(dmgPath, dmgFormat);
 
-			if (flags.codeSign) {
-				ora.text = 'Code signing DMG';
-				let identity: string | undefined;
-				if (flags.identity) {
-					// We skip identity validation to support both named and SHA-1 formats; let system validate.
-					identity = flags.identity;
-				} else {
-					const {stdout} = await execa('/usr/bin/security', ['find-identity', '-v', '-p', 'codesigning']);
-					if (!flags.identity && stdout.includes('Developer ID Application:')) {
-						identity = 'Developer ID Application';
-					} else if (!flags.identity && stdout.includes('Mac Developer:')) {
-						identity = 'Mac Developer';
-					} else if (!flags.identity && stdout.includes('Apple Development:')) {
-						identity = 'Apple Development';
+				if (flags.codeSign) {
+					ora.text = 'Code signing DMG';
+					let identity: string | undefined;
+					if (flags.identity) {
+						// We skip identity validation to support both named and SHA-1 formats; let system validate.
+						identity = flags.identity;
+					} else {
+						const {stdout} = await execa('/usr/bin/security', ['find-identity', '-v', '-p', 'codesigning']);
+						if (!flags.identity && stdout.includes('Developer ID Application:')) {
+							identity = 'Developer ID Application';
+						} else if (!flags.identity && stdout.includes('Mac Developer:')) {
+							identity = 'Mac Developer';
+						} else if (!flags.identity && stdout.includes('Apple Development:')) {
+							identity = 'Apple Development';
+						}
 					}
+
+					if (!identity) {
+						const error = new Error('No suitable code signing identity found') as Error & {stderr?: string};
+						error.stderr = 'No suitable code signing identity found';
+						throw error;
+					}
+
+					try {
+						await execa('/usr/bin/codesign', ['--sign', identity, dmgPath]);
+					} catch (error) {
+						const errorMessage = (error as {stderr?: string}).stderr?.trim() ?? error;
+						ora.fail(`Code signing failed. The DMG is fine, just not code signed.\n${errorMessage}`);
+						process.exit(2);
+					}
+
+					const {stderr} = await execa('/usr/bin/codesign', [dmgPath, '--display', '--verbose=2']);
+
+					const match = /^Authority=(.*)$/m.exec(stderr);
+					if (!match) {
+						ora.fail('Not code signed');
+						process.exit(1);
+					}
+
+					ora.info(`Code signing identity: ${match[1]}`).start();
+				} else {
+					ora.info('Code signing skipped').start();
 				}
 
-				if (!identity) {
-					const error = new Error('No suitable code signing identity found') as Error & {stderr?: string};
-					error.stderr = 'No suitable code signing identity found';
-					throw error;
-				}
-
-				try {
-					await execa('/usr/bin/codesign', ['--sign', identity, dmgPath]);
-				} catch (error) {
-					const errorMessage = (error as {stderr?: string}).stderr?.trim() ?? error;
-					ora.fail(`Code signing failed. The DMG is fine, just not code signed.\n${errorMessage}`);
-					process.exit(2);
-				}
-
-				const {stderr} = await execa('/usr/bin/codesign', [dmgPath, '--display', '--verbose=2']);
-
-				const match = /^Authority=(.*)$/m.exec(stderr);
-				if (!match) {
-					ora.fail('Not code signed');
-					process.exit(1);
-				}
-
-				ora.info(`Code signing identity: ${match[1]}`).start();
-			} else {
-				ora.info('Code signing skipped').start();
+				ora.succeed(`Created "${dmgFilename}"`);
+			} catch (error) {
+				const errorMessage = (error as {stderr?: string}).stderr?.trim() ?? error;
+				ora.fail(`${errorMessage}`);
+				process.exit(2);
 			}
-
-			ora.succeed(`Created "${dmgFilename}"`);
-		} catch (error) {
-			const errorMessage = (error as {stderr?: string}).stderr?.trim() ?? error;
-			ora.fail(`${errorMessage}`);
-			process.exit(2);
-		}
+		})();
 	});
 
 	ee.on('error', (error: Error) => {

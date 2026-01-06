@@ -8,7 +8,7 @@
 
 The project currently uses AVA (v6.1.1) as its test runner. While AVA is a popular testing framework with good TypeScript support, Node.js now includes a built-in test runner (stable since Node.js 20) that eliminates the need for external test frameworks.
 
-Given our decision to target Node.js 24, we have access to:
+Given our decision to target Node.js 22+, we have access to:
 - Native test runner with `node:test` module
 - Built-in assertion library with `node:assert`
 - Watch mode for test-driven development
@@ -28,7 +28,7 @@ Replace AVA with Node.js built-in test runner. This decision includes:
 ### Test Framework
 - Use `node:test` module for test organization and execution
 - Use `node:assert` for assertions (with strict mode)
-- Leverage Node.js 24's experimental TypeScript support via `--experimental-strip-types` flag
+- Leverage Node.js 22+'s experimental TypeScript support via `--experimental-strip-types` flag
 - Compile TypeScript to JavaScript before running tests (safer approach)
 
 ### Test Structure
@@ -54,7 +54,7 @@ Replace AVA with Node.js built-in test runner. This decision includes:
 ### Positive
 
 - **Zero Dependencies**: No need for external test framework, reducing dependency bloat
-- **Native TypeScript Support**: Node.js 24 can execute TypeScript tests with experimental flag
+- **Native TypeScript Support**: Node.js 22+ can execute TypeScript tests with experimental flag
 - **Modern Features**: Access to latest test runner features and improvements
 - **Simplicity**: Familiar API similar to other test frameworks (describe/test pattern)
 - **Performance**: Native implementation should be faster than external frameworks

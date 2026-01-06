@@ -3,7 +3,7 @@
 > Create a good-looking [DMG](https://en.wikipedia.org/wiki/Apple_Disk_Image) for your macOS app in seconds
 
 [![CI](https://github.com/Romerolweb/create-dmg-ts/workflows/CI/badge.svg)](https://github.com/Romerolweb/create-dmg-ts/actions)
-[![Node.js Version](https://img.shields.io/badge/node-%3E%3D24-brightgreen)](https://nodejs.org)
+[![Node.js Version](https://img.shields.io/badge/node-%3E%3D22-brightgreen)](https://nodejs.org)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue)](https://www.typescriptlang.org/)
 
 This is a TypeScript-based evolution of [create-dmg](https://github.com/sindresorhus/create-dmg) with enhanced type safety, modern tooling, and comprehensive documentation.
@@ -25,7 +25,7 @@ Imagine you have finished a macOS app, exported it from Xcode, and now want to d
 
 ## Install
 
-Requires [Node.js](https://nodejs.org) version **24 or later**.
+Requires [Node.js](https://nodejs.org) version **22 or later**.
 
 ```sh
 npm install --global create-dmg-ts

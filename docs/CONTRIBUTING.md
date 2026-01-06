@@ -22,7 +22,7 @@ By participating in this project, you agree to maintain a respectful and inclusi
 ### Prerequisites
 
 - **macOS**: This project only works on macOS due to platform-specific dependencies
-- **Node.js 24+**: Required for development
+- **Node.js 22+**: Required for development
 - **Xcode Command Line Tools**: Required for building and testing
 - **GraphicsMagick**: Optional, for icon composition testing
 

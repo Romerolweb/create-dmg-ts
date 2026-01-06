@@ -30,12 +30,12 @@ This ADR summarizes all the changes made during the upgrade and serves as a high
 
 ### 2. Runtime Platform (ADR-002)
 
-**Decision**: Update minimum Node.js version requirement from 18 to 24.
+**Decision**: Update minimum Node.js version requirement from 18 to 22.
 
 **Key Changes**:
-- Updated `package.json` engines field to require Node.js 24+
-- Updated CI/CD pipeline to test only against Node.js 24
-- Removed testing against older Node.js versions (18, 20)
+- Updated `package.json` engines field to require Node.js 22+
+- Updated CI/CD pipeline to test against Node.js 22 and 24
+- Support for both LTS versions (22 and 24)
 
 **Benefits**:
 - Access to latest ECMAScript features
@@ -74,7 +74,7 @@ This ADR summarizes all the changes made during the upgrade and serves as a high
 
 **Benefits**:
 - Zero external test framework dependencies
-- Native Node.js 24 support
+- Native Node.js 22+ support
 - Simpler configuration and maintenance
 - Faster test execution
 
@@ -141,7 +141,7 @@ create-dmg-ts/
 
 **Updated `package.json`**:
 - Changed name to `create-dmg-ts`
-- Updated engines requirement to Node.js 24+
+- Updated engines requirement to Node.js 22+
 - Binary points to `dist/cli.js` (compiled output)
 - Added comprehensive npm scripts:
   - `build`: Compile TypeScript
@@ -231,7 +231,7 @@ create-dmg-ts/
 ### Migration Path for Users
 
 Users of the original JavaScript version should:
-1. Upgrade to Node.js 24+
+1. Upgrade to Node.js 22+
 2. Update package references if using programmatically
 3. Review updated documentation for any workflow changes
 

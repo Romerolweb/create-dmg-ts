@@ -69,7 +69,7 @@ async function baseComposeIcon(
 			`1,1  ${appIconSize.width * 0.08},1     ${appIconSize.width},1  ${appIconSize.width * 0.92},1     1,${appIconSize.height}  1,${appIconSize.height}     ${appIconSize.width},${appIconSize.height}  ${appIconSize.width},${appIconSize.height}`
 		);
 
-	// Resize the app icon to fit it inside the mount icon, aspect ration should not be kept to create the perspective illution
+	// Resize the app icon to fit it inside the mount icon, aspect ratio should not be kept to create the perspective illusion
 	appIcon = appIcon.resize(mountIconSize.width / 1.58, mountIconSize.height / 1.82, '!');
 
 	const temporaryAppIconPath = temporaryFile({extension: 'png'});

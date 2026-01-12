@@ -23,7 +23,7 @@
 		"typecheck": "tsc --noEmit",
 		"lint": "eslint .",
 		"lint:fix": "eslint . --fix",
-		"test": "node --test dist/**/*.test.js",
+		"test": "node --test dist/*.test.js",
 		"pretest": "npm run build",
 		"prepare": "husky || true"
 	},
@@ -48,7 +48,6 @@
 		"apple"
 	],
 	"dependencies": {
-		"appdmg": "^0.6.6",
 		"execa": "^8.0.1",
 		"gm": "^1.25.0",
 		"icns-lib": "^1.0.1",
@@ -56,6 +55,9 @@
 		"ora": "^8.0.1",
 		"plist": "^3.1.0",
 		"tempy": "^3.1.0"
+	},
+	"optionalDependencies": {
+		"appdmg": "^0.6.6"
 	},
 	"devDependencies": {
 		"@types/node": "^24.0.0",

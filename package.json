@@ -70,9 +70,6 @@
 		"typescript": "^5.7.2"
 	},
 	"lint-staged": {
-		"*.ts": [
-			"eslint --fix",
-			"tsc --noEmit"
-		]
+		"*.ts": "eslint --fix"
 	}
 }

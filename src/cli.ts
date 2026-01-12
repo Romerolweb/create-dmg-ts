@@ -78,12 +78,13 @@ if (!inputAppPath) {
 	process.exit(1);
 }
 
-// At this point, inputAppPath is guaranteed to be defined
-const appPath: string = inputAppPath;
-
 if (!destinationPath) {
 	destinationPath = process.cwd();
 }
+
+// At this point, both are guaranteed to be defined
+const appPath = inputAppPath;
+const finalDestinationPath = destinationPath;
 
 const infoPlistPath = path.join(appPath, 'Contents/Info.plist');
 
@@ -121,7 +122,7 @@ async function init(): Promise<void> {
 	const dmgFilename = flags.versionInFilename
 		? `${appName} ${appInfo.CFBundleShortVersionString ?? '0.0.0'}.dmg`
 		: `${appName}.dmg`;
-	const dmgPath = path.join(destinationPath!, dmgFilename);
+	const dmgPath = path.join(finalDestinationPath, dmgFilename);
 
 	if (dmgTitle.length > 27) {
 		ora.fail('The disk image title cannot exceed 27 characters. This is a limitation in a dependency: https://github.com/LinusU/node-alias/issues/7');

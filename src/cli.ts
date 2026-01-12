@@ -70,12 +70,16 @@ const cli = meow(`
 	},
 });
 
-let [appPath, destinationPath] = cli.input;
+let [inputAppPath] = cli.input;
+let destinationPath = cli.input[1];
 
-if (!appPath) {
+if (!inputAppPath) {
 	console.error('Specify an app');
 	process.exit(1);
 }
+
+// At this point, inputAppPath is guaranteed to be defined
+const appPath: string = inputAppPath;
 
 if (!destinationPath) {
 	destinationPath = process.cwd();
@@ -95,7 +99,7 @@ try {
 	throw error;
 }
 
-const ora = new Ora('Creating DMG');
+const ora = Ora('Creating DMG');
 ora.start();
 
 async function init(): Promise<void> {
@@ -134,7 +138,7 @@ async function init(): Promise<void> {
 	let composedIconPath: string | undefined;
 	if (hasAppIcon) {
 		ora.text = 'Creating icon';
-		const appIconName = appInfo.CFBundleIconFile!.replace(/\.icns/, '');
+		const appIconName = hasAppIcon.replace(/\.icns/, '');
 		composedIconPath = await composeIcon(path.join(appPath, 'Contents/Resources', `${appIconName}.icns`));
 	}
 

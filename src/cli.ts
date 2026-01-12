@@ -82,8 +82,8 @@ if (!destinationPath) {
 	destinationPath = process.cwd();
 }
 
-// At this point, both are guaranteed to be defined
-const appPath = inputAppPath;
+// At this point, both are guaranteed to be defined - create non-nullable references
+const appPath = inputAppPath!;
 const finalDestinationPath = destinationPath;
 
 const infoPlistPath = path.join(appPath, 'Contents/Info.plist');
